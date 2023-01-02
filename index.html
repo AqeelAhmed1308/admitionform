@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admition form</title>
+    <!-- <script src="app.js"></script> -->
+</head>
+
+<body style="font-family: Verdana, Geneva, Tahoma, sans-serif;">
+    <p>
+        <label for="">Admition no.</label>
+        <input type="number" required name="" id="adm" placeholder=" Admition Number">
+    </p>
+    <p>
+        <label for="">Student Name</label>
+        <input type="text" name="" id="sName" required placeholder="Enter Your Name">
+    </p>
+    <p>
+        <label for="">Language</label>
+
+        <input type="checkbox" name="chklang" value="English" id="">English
+        <input type="checkbox" name="chklang" value="Urdu" id="">Urdu
+        <input type="checkbox" name="chklang" value="Arabi" id="">Arabi
+    </p>
+    <P>
+        <label for="">gender</label>
+        <input type="radio" name="aqeel" id="gender" checked> Male
+        <input type="radio" name="aqeel" id="gender" > Female
+
+    </P>
+    <p>
+        <label for="">city</label>
+        <select name="" id="selectCity">
+            <option value="s">---Select City---</option>
+            <option value="k">Karachi</option>
+            <option value="i">Islamabad</option>
+            <option value="l">Lahore</option>
+            <option value="q">Quetta</option>
+            <option value="b">Balochistan</option>
+            <option value="r">Rawalpindi</option>
+        </select>
+    </p>
+
+    <p>
+        <input type="button" value="Submit" id="btnSubmit">
+    </p>
+    <p id="c" style="visibility: hidden;">
+        <input style="color: brown;" type="button" value="Update" id="ptnupdate">
+        <input type="button" value="Cancel" id="can">
+    </p>
+
+
+    <table border="1" width="100%">
+        <thead>
+            <tr>
+                <th>
+                    Adm#
+                </th>
+                <th>
+                    Name
+                </th>
+            </tr>
+        </thead>
+        <tbody id="tb">
+
+        </tbody>
+    </table>
+    <script type="module">
+    // Import the functions you need from the SDKs you need
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-app.js";
+import {  getDatabase, ref, push, child, set, get } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-database.js";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyBqSb-bT4QD6rwtqLluvJun3DZ5uoPNrAg",
+  authDomain: "admition-form.firebaseapp.com",
+  databaseURL: "https://admition-form-default-rtdb.firebaseio.com",
+  projectId: "admition-form",
+  storageBucket: "admition-form.appspot.com",
+  messagingSenderId: "735719361786",
+  appId: "1:735719361786:web:8c929d37d26264514f4d43",
+  measurementId: "G-CG926J1JVW"
+};
+
+   
+           
+
+        //console.log('teac')
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        //const analytics = getAnalytics(app);
+        const db = getDatabase(app)
+        const dbREf = ref(db, 'school/Student')
+        const dbRefForGet = ref(db)
+        //let key = push(dbREf).key
+        //console.log(key)
+
+        let ptnupdate = document.getElementById('ptnupdate')
+        let c = document.getElementById('c')
+        let can = document.getElementById('can')
+        
+        let btnSubmit = document.getElementById('btnSubmit')
+        btnSubmit.addEventListener('click', funSubmit)
+
+        ptnupdate.addEventListener('click', funupd)
+        can.addEventListener('click', funcan)
+
+        function funupd() {
+
+            btnSubmit.setAttribute('style','visibility:visible')
+            c.setAttribute('style', 'visibility:visible')
+
+            let objstudent = {}
+
+            let adm = document.getElementById('adm').value
+            objstudent.AdmimitionNo = adm
+
+            objstudent.studentName = document.getElementById('sName').value
+            let gender = document.getElementsByClassName('gender')
+
+            for (var i = 0; i < gender.length; i++) {
+                if (gender[i].checked == true) {
+                    objstudent.Gender = gender[i].value
+                }
+            }
+
+            let langControl = document.getElementsByName('chklang')
+            let lang = []
+            for (var i = 0; i < langControl.length; i++) {
+                if (langControl[i].checked == true) {
+                    lang.push(langControl[i].value)
+                }
+            }
+            objstudent.lanuages = lang
+            console.log(objstudent)
+            let key = eid
+            objstudent.key = key
+            console.log(objstudent)
+            let newchild = child(dbREf, objstudent.key)
+            set(newchild, objstudent)
+            eid = ''
+            c.setAttribute('style', 'visibility:hidden')
+            getAllData()
+        }
+        function funcan() {
+
+            btnSubmit.setAttribute('style','visibility:visible')
+            c.setAttribute('style', 'visibility: hidden')
+        }
+        function funSubmit() {
+            let objstudent = {}
+
+            let adm = document.getElementById('adm').value
+            objstudent.AdmimitionNo = adm
+            objstudent.studentName = document.getElementById('sName').value
+
+
+            let gender = document.getElementsByClassName('gender')
+
+            for (var i = 0; i < gender.length; i++) {
+                if (gender[i].checked == true) {
+                    objstudent.Gender = gender[i].value
+                }
+            }
+
+            let langControl = document.getElementsByName('chklang')
+            let lang = []
+            for (var i = 0; i < langControl.length; i++) {
+                if (langControl[i].checked == true) {
+                    lang.push(langControl[i].value)
+                }
+            }
+            objstudent.lanuages = lang
+            console.log(objstudent)
+
+            let key = push(dbREf).key
+            objstudent.key = key
+            console.log(objstudent)
+            let newchild = child(dbREf, objstudent.key)
+            set(newchild, objstudent).then(()=>{
+                getAllData()
+
+            })
+            
+        }
+
+        getAllData()
+        let allObject
+        function getAllData() {
+
+            get(child(dbRefForGet, 'school/Student')).then((data) => {
+               
+
+                allObject = Object.values(data.val())
+
+               
+                fillTable()
+            }).catch((troor) => {
+                alert(troor)
+
+
+            })
+
+
+        }
+
+        function eButton(a) {
+            //alert(a.id)
+
+        }
+
+        let eid = ""
+
+        function funEdit(a) {
+            // alert(a)
+            btnSubmit.setAttribute('style','visibility:hidden')
+            c.setAttribute('style', 'visibility:visible')
+            allObject.forEach(element => {
+                
+                if (element.key == a) {
+                    eid = a
+                    //alert(element.key)
+                    document.getElementById('adm').value = element.AdmimitionNo
+                    document.getElementById('sName').value = element.studentName
+
+
+                    let gender = document.getElementsByClassName('gender')
+
+                    for (var i = 0; i < gender.length; i++) {
+                        if (gender[i].checked == true) {
+                            ///objstudent.Gender = gender[i].value
+                        }
+                    }
+                }
+            });
+
+
+        }
+
+        function fillTable() {
+            let tb = document.getElementById('tb')
+            
+            while(tb.rows.length>0){
+                tb.deleteRow(0)
+            }
+            allObject.forEach(element => {
+
+                var tr = document.createElement('tr')
+
+                var td = document.createElement('td')
+                td.innerHTML = element.AdmimitionNo
+                tr.appendChild(td)
+
+                var td = document.createElement('td')
+                td.innerText = element.studentName
+                tr.appendChild(td)
+
+                let btn = document.createElement('button')
+                btn.innerText = 'Edit'
+                btn.setAttribute('id', element.key)
+                btn.addEventListener('click', (e) => {
+                    funEdit(e.target.id)
+
+                })
+
+                var td = document.createElement('td')
+                td.appendChild(btn)
+                tr.appendChild(td)
+                let btnd = document.createElement('button')
+                btnd.innerHTML = 'delet'
+                btnd.setAttribute('id',element.key)
+                btnd.addEventListener('click', (a) => {
+                //  var newchild = child(dbREf,a.target.id)
+                //  remove(newchild)   
+                //  //console.log(a)
+                removeRecord(a.target.id)
+             })
+
+
+
+
+                td.appendChild(btnd)
+                tb.appendChild(tr)
+
+
+            });
+
+
+        }
+
+        function removeRecord(ab){
+         //var newchild = child(dbREf,ab)
+                // remove(newchild)   
+                //console.log(ab)
+                remove(child(dbREf,ab))
+  
+        }
+
+
+
+
+    </script>
+
+</body>
+
+</html>
