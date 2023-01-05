@@ -1,0 +1,71 @@
+git Bash 
+    ak software pr multiple team members k kam or version ko normally
+    hnadle/save rakhna or backups rakhna developers ya software houses ya teams
+    k lea ak dard e sar (chanllenge) hota tha. 
+    is ko overcome(khatam) karne k lea ak developer he na kam kia or phr os kam
+    bad bohat se logo ne b indiviual or os k sath or seprately b kam kia
+    or ak software bana lia jis ko git kaha jata he
+
+    isko vcs version control system b kaha jata he
+
+    hm jo install krn ge os ko git bash kaha jata he
+    installation
+    open chorome and type git bash in address bar 
+    show hone wale links me se is link pr click krn
+    https://git-scm.com/downloads
+    open hone pr apne system k according(windows,mac,linux)
+    pr click kr software ko download kr ln or phr install kr ln
+
+    installation k bad kisi b folder me right click kr k 
+    git bash here 
+    pr click krne se software open ho jae ga 
+    basic configuration commands
+    1- git config --global user.name 'user name here'
+    2- git config --global user.email 'useremail@domain.com'
+    
+    in basic commands k bad hm kisi repository or repo or folder me 
+    git ki following commands run krn ge
+    first in any folder
+    
+    *git status    
+        reply/response fatal error not a git repository
+    * git init 
+        Initialized empty git repository in folderAddress
+
+    * git status
+        No commits yet 
+        Nothing to commit
+    
+    git terminal k andar file banane ki command
+    **touch filename.extenstion
+
+    *git status 
+        No commit yet
+        untracked files
+
+    agar ab hm kisi ak file ko tracking me lana chahe to 
+    * git add filename
+
+    * git status
+        No comments yet 
+        changes to be commited 
+        use git rm --cached filename
+            new file : filename
+        
+    untracked files 
+
+    Now we create another file
+    * git touch text2.txt 
+
+    * git status 
+
+agar tamam files ko ak sath tracking me lana ho to
+    * git add .
+        No meassage to show
+    
+    * git status
+        karne pr changes to be committed k message de ga
+          
+        
+    
+

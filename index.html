@@ -138,10 +138,10 @@ const firebaseConfig = {
                 }
             }
             objstudent.lanuages = lang
-            console.log(objstudent)
+            //console.log(objstudent)
             let key = eid
             objstudent.key = key
-            console.log(objstudent)
+            //console.log(objstudent)
             let newchild = child(dbREf, objstudent.key)
             set(newchild, objstudent)
             eid = ''
@@ -177,11 +177,11 @@ const firebaseConfig = {
                 }
             }
             objstudent.lanuages = lang
-            console.log(objstudent)
+            //console.log(objstudent)
 
             let key = push(dbREf).key
             objstudent.key = key
-            console.log(objstudent)
+            //console.log(objstudent)
             let newchild = child(dbREf, objstudent.key)
             set(newchild, objstudent).then(()=>{
                 getAllData()
@@ -217,6 +217,7 @@ const firebaseConfig = {
 
         let eid = ""
 
+        //let abc = "aqeel"
         function funEdit(a) {
             // alert(a)
             btnSubmit.setAttribute('style','visibility:hidden')
@@ -276,10 +277,8 @@ const firebaseConfig = {
                 btnd.innerHTML = 'delet'
                 btnd.setAttribute('id',element.key)
                 btnd.addEventListener('click', (a) => {
-                //  var newchild = child(dbREf,a.target.id)
-                //  remove(newchild)   
-                //  //console.log(a)
-                removeRecord(a.target.id)
+       
+                    removeRecord(a.target.id)
              })
 
 
